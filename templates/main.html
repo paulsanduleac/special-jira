@@ -1,0 +1,25 @@
+<html>
+  <head>
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/reset.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/default.css') }}">
+      <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles/style.css') }}">
+        {% if settings.title %}
+        <title>{{ settings.title }}</title>
+        {% else %}
+        <title>Default title</title>
+        {% endif %}
+  </head>
+  <body>
+    <header>
+        <h3>{{ settings.title }}</h3>
+    </header>
+    {% for message in get_flashed_messages() %}
+        <div class=flash>
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+    <div class="pane">
+        {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

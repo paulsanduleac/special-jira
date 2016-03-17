@@ -1,0 +1,24 @@
+<!-- Extend main layout -->
+{% extends "main.html" %}
+
+{% block content %}
+    <div class="not-front">
+        <h2 class="toptitle">Welcome</h2>
+        <h4>Create an issue</h4>
+        <form action="" method="post" name="createissue">
+          {{ form.hidden_tag() }}
+          <p>
+              Title {{ form.title(size=25) }}
+          </p>
+          <p>Summary:</p>
+          <p>{{form.description(rows='10',cols='30')}}</p>
+          <p><input class="button" type="submit" value="Submit Issue"></p>
+      </form>
+        <h3>My issues: </h3>
+        {% for issue in issues %}
+        <div class="row">
+            <p><b>{{ issue.key }}</b> | {{ issue.fields.summary }}</p>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "main.html" %}
+
+{% block content %}
+  <div class="front">
+      <form action="" method="post" name="login">
+          {{ form.hidden_tag() }}
+          <p>
+              Please enter your access key:
+          </p>
+          <p>{{ form.accesskey(size=25) }}</p>
+          <p>{{ form.remember_me }} Remember Me</p>
+          <p><input class="button" type="submit" value="Sign In"></p>
+      </form>
+  </div>
+{% endblock %}
