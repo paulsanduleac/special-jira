@@ -1,4 +1,7 @@
 #Fill all fields and save this file as settings.py
+appkey = "ACCESS_KEY_TO_THIS_APP_HERE"
+cookie_salt = 'SALT_TO_BE_USED_IN_GENERATING_COOKIES_HERE'
+
 globaloptions = {
     'server': 'JIRA_URL_GOES_HERE' #JIRA cloud URL
 	}

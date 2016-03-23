@@ -3,22 +3,35 @@
 
 {% block content %}
     <div class="not-front">
-        <h2 class="toptitle">Welcome</h2>
-        <h4>Create an issue</h4>
-        <form action="" method="post" name="createissue">
-          {{ form.hidden_tag() }}
-          <p>
-              Title {{ form.title(size=25) }}
-          </p>
-          <p>Summary:</p>
-          <p>{{form.description(rows='10',cols='30')}}</p>
-          <p><input class="button" type="submit" value="Submit Issue"></p>
-      </form>
-        <h3>My issues: </h3>
-        {% for issue in issues %}
-        <div class="row">
-            <p><b>{{ issue.key }}</b> | {{ issue.fields.summary }}</p>
+        <div class="col col-1">
+            <h2 class="toptitle">Welcome</h2>
+            <div class="form-createissue">
+                <h4>Create an issue</h4>
+                <form action="" method="post" name="createissue">
+                    {{ form.hidden_tag() }}
+                    <div class="col col-30">
+                        <p><b>Issue Title</b></p>
+                        <p><b>Redmine #</b></p>
+                    </div>
+                    <div class="col col-30">
+                        {{ form.title(size=25) }}
+                        {{ form.redmine(size=25) }}
+                    </div>
+                    <div class="container">
+                        <p><b>Summary:</b></p>
+                        <p>{{form.description(rows='10',cols='30')}}</p>
+                        <p><input class="button" type="submit" value="Submit Issue"></p>
+                    </div>
+                </form>
+            </div>
         </div>
-        {% endfor %}
+        <div class="col col-2">
+            <h3>My issues: </h3>
+            {% for issue in issues %}
+            <div class="row">
+                <p><b>{{ issue.key }}</b> | {{ issue.fields.summary }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

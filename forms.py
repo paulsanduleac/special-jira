@@ -8,4 +8,5 @@ class LoginForm(Form):
 
 class CreateIssue(Form):
     title = StringField('Title', validators=[DataRequired()])
+    redmine = StringField('Redmine', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
