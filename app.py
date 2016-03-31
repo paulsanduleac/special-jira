@@ -25,7 +25,10 @@ def homepage():
         if form.accesskey.data == settings.appkey:
             flash('Login requested for access key="%s", remember_me=%s' % (form.accesskey.data, str(form.remember_me.data)))
             response = make_response(redirect('/dashboard'))
-            response.set_cookie('miniJIRA', cookie_token)
+            if form.remember_me.data:
+                response.set_cookie('miniJIRA', cookie_token, settings.cookie_max_age)
+            else:
+                response.set_cookie('miniJIRA', cookie_token)
             return response
         else:
             flash('Invalid access key. Please try again.')

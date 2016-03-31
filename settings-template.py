@@ -16,4 +16,5 @@ dashboard = {
 	'title': 'miniJIRA | Dashboard' #Homepage title
 	}
 
+cookie_max_age = 1 # Set cookie lifetime for 'remember me' checkbox
 
