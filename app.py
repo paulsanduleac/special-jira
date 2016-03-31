@@ -23,7 +23,8 @@ def homepage():
     if form.validate_on_submit():
 
         if form.accesskey.data == settings.appkey:
-            flash('Login requested for access key="%s", remember_me=%s' % (form.accesskey.data, str(form.remember_me.data)))
+            # todo remove the debug line
+            # flash('Login requested for access key="%s", remember_me=%s' % (form.accesskey.data, str(form.remember_me.data)))
             response = make_response(redirect('/dashboard'))
             if form.remember_me.data:
                 response.set_cookie('miniJIRA', cookie_token, settings.cookie_max_age)
@@ -45,9 +46,15 @@ def dashboard():
     current_issues = jira.search_issues('reporter = currentUser()')
     CreateIssueForm = forms.CreateIssue()
     if CreateIssueForm.validate_on_submit():
-        new_issue = jira.create_issue(project=settings.project, summary=CreateIssueForm.title.data, description=CreateIssueForm.description.data, issuetype={'name': 'Task'})
+        new_issue_title = CreateIssueForm.redmine.data
+        if settings.redmine:
+            new_issue_title = CreateIssueForm.title.data + ' [redmine #%s]' % (CreateIssueForm.redmine.data)
+        new_issue = jira.create_issue(project=settings.project, summary=new_issue_title,description=CreateIssueForm.description.data, issuetype={'name': 'Task'})
+        if settings.redmine:
+            weblink = {"object": {'url': settings.redmine_url+CreateIssueForm.redmine.data, 'title': 'Redmine #'+CreateIssueForm.redmine.data}}
+            jira.add_simple_link(new_issue.key, object=weblink)
         flash('New issue created: %s, Title=%s, Description=%s' %
-              (new_issue.key, CreateIssueForm.title.data, str(CreateIssueForm.description.data)))
+              (new_issue.key, new_issue_title, str(CreateIssueForm.description.data)))
         return redirect('/dashboard')
     try:
         return render_template("dashboard.html", settings=settings.dashboard, issues=current_issues, form=CreateIssueForm)

@@ -17,4 +17,6 @@ dashboard = {
 	}
 
 cookie_max_age = 1 # Set cookie lifetime for 'remember me' checkbox
+redmine = 1 # set to 0 to turn off redmine cross-reference field
+redmine_url = 'REDMINE_URL_GOES_HERE' # if redmine is not 0 then set a project URL
 

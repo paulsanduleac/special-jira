@@ -11,11 +11,15 @@
                     {{ form.hidden_tag() }}
                     <div class="col col-30">
                         <p><b>Issue Title</b></p>
+                        {% if form.redmine %}
                         <p><b>Redmine #</b></p>
+                        {% endif %}
                     </div>
                     <div class="col col-30">
                         {{ form.title(size=25) }}
+                        {% if form.redmine %}
                         {{ form.redmine(size=25) }}
+                        {% endif %}
                     </div>
                     <div class="container">
                         <p><b>Summary:</b></p>
